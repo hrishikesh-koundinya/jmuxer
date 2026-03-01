@@ -19,24 +19,27 @@
     if (void 0 === e) throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
     return e;
   }
+  function _callSuper(t, o, e) {
+    return o = _getPrototypeOf(o), _possibleConstructorReturn(t, _isNativeReflectConstruct() ? Reflect.construct(o, e || [], _getPrototypeOf(t).constructor) : o.apply(t, e));
+  }
   function _classCallCheck(a, n) {
     if (!(a instanceof n)) throw new TypeError("Cannot call a class as a function");
   }
   function _defineProperties(e, r) {
     for (var t = 0; t < r.length; t++) {
       var o = r[t];
-      o.enumerable = o.enumerable || !1, o.configurable = !0, "value" in o && (o.writable = !0), Object.defineProperty(e, _toPropertyKey(o.key), o);
+      o.enumerable = o.enumerable || false, o.configurable = true, "value" in o && (o.writable = true), Object.defineProperty(e, _toPropertyKey(o.key), o);
     }
   }
   function _createClass(e, r, t) {
     return r && _defineProperties(e.prototype, r), t && _defineProperties(e, t), Object.defineProperty(e, "prototype", {
-      writable: !1
+      writable: false
     }), e;
   }
   function _createForOfIteratorHelper(r, e) {
     var t = "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"];
     if (!t) {
-      if (Array.isArray(r) || (t = _unsupportedIterableToArray(r)) || e && r && "number" == typeof r.length) {
+      if (Array.isArray(r) || (t = _unsupportedIterableToArray(r)) || e) {
         t && (r = t);
         var n = 0,
           F = function () {};
@@ -44,9 +47,9 @@
           s: F,
           n: function () {
             return n >= r.length ? {
-              done: !0
+              done: true
             } : {
-              done: !1,
+              done: false,
               value: r[n++]
             };
           },
@@ -59,8 +62,8 @@
       throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
     }
     var o,
-      a = !0,
-      u = !1;
+      a = true,
+      u = false;
     return {
       s: function () {
         t = t.call(r);
@@ -70,7 +73,7 @@
         return a = r.done, r;
       },
       e: function (r) {
-        u = !0, o = r;
+        u = true, o = r;
       },
       f: function () {
         try {
@@ -81,24 +84,12 @@
       }
     };
   }
-  function _createSuper(t) {
-    var r = _isNativeReflectConstruct();
-    return function () {
-      var e,
-        o = _getPrototypeOf(t);
-      if (r) {
-        var s = _getPrototypeOf(this).constructor;
-        e = Reflect.construct(o, arguments, s);
-      } else e = o.apply(this, arguments);
-      return _possibleConstructorReturn(this, e);
-    };
-  }
   function _defineProperty(e, r, t) {
     return (r = _toPropertyKey(r)) in e ? Object.defineProperty(e, r, {
       value: t,
-      enumerable: !0,
-      configurable: !0,
-      writable: !0
+      enumerable: true,
+      configurable: true,
+      writable: true
     }) : e[r] = t, e;
   }
   function _getPrototypeOf(t) {
@@ -111,11 +102,11 @@
     t.prototype = Object.create(e && e.prototype, {
       constructor: {
         value: t,
-        writable: !0,
-        configurable: !0
+        writable: true,
+        configurable: true
       }
     }), Object.defineProperty(t, "prototype", {
-      writable: !1
+      writable: false
     }), e && _setPrototypeOf(t, e);
   }
   function _isNativeReflectConstruct() {
@@ -137,15 +128,12 @@
         i,
         u,
         a = [],
-        f = !0,
-        o = !1;
+        f = true,
+        o = false;
       try {
-        if (i = (t = t.call(r)).next, 0 === l) {
-          if (Object(t) !== t) return;
-          f = !1;
-        } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0);
+        if (i = (t = t.call(r)).next, 0 === l) ; else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0);
       } catch (r) {
-        o = !0, n = r;
+        o = true, n = r;
       } finally {
         try {
           if (!f && null != t.return && (u = t.return(), Object(u) !== u)) return;
@@ -182,11 +170,11 @@
     if ("object" != typeof t || !t) return t;
     var e = t[Symbol.toPrimitive];
     if (void 0 !== e) {
-      var i = e.call(t, r || "default");
+      var i = e.call(t, r);
       if ("object" != typeof i) return i;
       throw new TypeError("@@toPrimitive must return a primitive value.");
     }
-    return ("string" === r ? String : Number)(t);
+    return (String )(t);
   }
   function _toPropertyKey(t) {
     var i = _toPrimitive(t, "string");
@@ -212,10 +200,8 @@
   var logger;
   var errorLogger;
   function setLogger(log, err) {
-    /*eslint-disable */
     logger = log;
     errorLogger = err;
-    /*eslint-enable */
   }
   function log(message) {
     if (logger) {
@@ -240,7 +226,7 @@
       this.listener = {};
       this.type = type | '';
     }
-    _createClass(Event, [{
+    return _createClass(Event, [{
       key: "on",
       value: function on(event, fn) {
         if (!this.listener[event]) {
@@ -281,7 +267,6 @@
         return false;
       }
     }]);
-    return Event;
   }();
 
   /**
@@ -293,7 +278,7 @@
     function MP4() {
       _classCallCheck(this, MP4);
     }
-    _createClass(MP4, null, [{
+    return _createClass(MP4, null, [{
       key: "init",
       value: function init() {
         MP4.types = {
@@ -1029,14 +1014,13 @@
         return result;
       }
     }]);
-    return MP4;
   }();
 
   var AACParser = /*#__PURE__*/function () {
     function AACParser() {
       _classCallCheck(this, AACParser);
     }
-    _createClass(AACParser, null, [{
+    return _createClass(AACParser, null, [{
       key: "samplingRateMap",
       get: function get() {
         return [96000, 88200, 64000, 48000, 44100, 32000, 24000, 22050, 16000, 12000, 11025, 8000, 7350];
@@ -1085,18 +1069,16 @@
         };
       }
     }]);
-    return AACParser;
   }();
 
   var track_id = 1;
   var BaseRemuxer = /*#__PURE__*/function (_Event) {
-    _inherits(BaseRemuxer, _Event);
-    var _super = _createSuper(BaseRemuxer);
     function BaseRemuxer() {
       _classCallCheck(this, BaseRemuxer);
-      return _super.apply(this, arguments);
+      return _callSuper(this, BaseRemuxer, arguments);
     }
-    _createClass(BaseRemuxer, [{
+    _inherits(BaseRemuxer, _Event);
+    return _createClass(BaseRemuxer, [{
       key: "flush",
       value: function flush() {
         this.mp4track.len = 0;
@@ -1114,16 +1096,13 @@
         return track_id++;
       }
     }]);
-    return BaseRemuxer;
   }(Event);
 
   var AACRemuxer = /*#__PURE__*/function (_BaseRemuxer) {
-    _inherits(AACRemuxer, _BaseRemuxer);
-    var _super = _createSuper(AACRemuxer);
     function AACRemuxer(timescale, duration, frameDuration) {
       var _this;
       _classCallCheck(this, AACRemuxer);
-      _this = _super.call(this, 'AACRemuxer');
+      _this = _callSuper(this, AACRemuxer, ['AACRemuxer']);
       _this.frameDuration = frameDuration;
       _this.readyToDecode = false;
       _this.header = null;
@@ -1144,7 +1123,8 @@
       _this.samples = [];
       return _this;
     }
-    _createClass(AACRemuxer, [{
+    _inherits(AACRemuxer, _BaseRemuxer);
+    return _createClass(AACRemuxer, [{
       key: "resetTrack",
       value: function resetTrack() {
         this.readyToDecode = false;
@@ -1288,7 +1268,6 @@
         this.readyToDecode = true;
       }
     }]);
-    return AACRemuxer;
   }(BaseRemuxer);
 
   /**
@@ -1302,7 +1281,7 @@
       this.index = 0;
       this.bitLength = data.byteLength * 8;
     }
-    _createClass(ExpGolomb, [{
+    return _createClass(ExpGolomb, [{
       key: "setData",
       value: function setData(data) {
         this.data = data;
@@ -1419,7 +1398,6 @@
         return this.readBits(32);
       }
     }]);
-    return ExpGolomb;
   }();
 
   // spec https://www.itu.int/rec/T-REC-H.264/
@@ -1428,7 +1406,7 @@
     function H264Parser() {
       _classCallCheck(this, H264Parser);
     }
-    _createClass(H264Parser, null, [{
+    return _createClass(H264Parser, null, [{
       key: "extractNALu",
       value: function extractNALu(buffer) {
         var i = 0,
@@ -1685,7 +1663,6 @@
         };
       }
     }]);
-    return H264Parser;
   }();
   var NALU264 = /*#__PURE__*/function () {
     function NALU264(data) {
@@ -1696,7 +1673,7 @@
       this._sliceType = null;
       this._isFirstSlice = false;
     }
-    _createClass(NALU264, [{
+    return _createClass(NALU264, [{
       key: "toString",
       value: function toString() {
         return "".concat(NALU264.TYPES[this.type()] || 'UNKNOWN', ": NRI: ").concat(this.getNri());
@@ -1803,11 +1780,9 @@
     }, {
       key: "TYPES",
       get: function get() {
-        var _ref;
-        return _ref = {}, _defineProperty(_ref, NALU264.IDR, 'IDR'), _defineProperty(_ref, NALU264.SEI, 'SEI'), _defineProperty(_ref, NALU264.SPS, 'SPS'), _defineProperty(_ref, NALU264.PPS, 'PPS'), _defineProperty(_ref, NALU264.NDR, 'NDR'), _defineProperty(_ref, NALU264.AUD, 'AUD'), _ref;
+        return _defineProperty(_defineProperty(_defineProperty(_defineProperty(_defineProperty(_defineProperty({}, NALU264.IDR, 'IDR'), NALU264.SEI, 'SEI'), NALU264.SPS, 'SPS'), NALU264.PPS, 'PPS'), NALU264.NDR, 'NDR'), NALU264.AUD, 'AUD');
       }
     }]);
-    return NALU264;
   }();
 
   function appendByteArray(buffer1, buffer2) {
@@ -1850,12 +1825,10 @@
   }
 
   var H264Remuxer = /*#__PURE__*/function (_BaseRemuxer) {
-    _inherits(H264Remuxer, _BaseRemuxer);
-    var _super = _createSuper(H264Remuxer);
     function H264Remuxer(timescale, duration, frameDuration) {
       var _this;
       _classCallCheck(this, H264Remuxer);
-      _this = _super.call(this, 'H264Remuxer');
+      _this = _callSuper(this, H264Remuxer, ['H264Remuxer']);
       _this.frameDuration = frameDuration;
       _this.readyToDecode = false;
       _this.nextDts = 0;
@@ -1880,7 +1853,8 @@
       _this.pendingUnits = {};
       return _this;
     }
-    _createClass(H264Remuxer, [{
+    _inherits(H264Remuxer, _BaseRemuxer);
+    return _createClass(H264Remuxer, [{
       key: "resetTrack",
       value: function resetTrack() {
         this.readyToDecode = false;
@@ -2141,7 +2115,6 @@
         return push;
       }
     }]);
-    return H264Remuxer;
   }(BaseRemuxer);
 
   // spec https://www.itu.int/rec/T-REC-H.265/
@@ -2150,7 +2123,7 @@
     function H265Parser() {
       _classCallCheck(this, H265Parser);
     }
-    _createClass(H265Parser, null, [{
+    return _createClass(H265Parser, null, [{
       key: "extractNALu",
       value: function extractNALu(buffer) {
         var i = 0,
@@ -2285,9 +2258,7 @@
                 } else {
                   var coefNum = Math.min(64, 1 << 4 + (sizeId << 1));
                   if (sizeId > 1) decoder.readEG(); // scaling_list_dc_coef_minus8
-                  for (var k = 0; k < coefNum; k++) {
-                    decoder.readEG();
-                  }
+                  for (var k = 0; k < coefNum; k++) decoder.readEG();
                 }
               }
             }
@@ -2495,7 +2466,6 @@
         };
       }
     }]);
-    return H265Parser;
   }();
   var NALU265 = /*#__PURE__*/function () {
     function NALU265(data) {
@@ -2507,7 +2477,7 @@
       this._isFirstSlice = null;
       this._sliceType = null;
     }
-    _createClass(NALU265, [{
+    return _createClass(NALU265, [{
       key: "toString",
       value: function toString() {
         return "".concat(NALU265.TYPES[this.type()] || 'UNKNOWN (' + this.type() + ')', ": Layer: ").concat(this.nuhLayerId, ", Temporal Id: ").concat(this.nuhTemporalIdPlus1);
@@ -2648,19 +2618,16 @@
       key: "TYPES",
       get: function get() {
         var _ref;
-        return _ref = {}, _defineProperty(_ref, NALU265.TRAIL_N, 'TRAIL_N'), _defineProperty(_ref, NALU265.TRAIL_R, 'TRAIL_R'), _defineProperty(_ref, NALU265.IDR_W_RADL, 'IDR'), _defineProperty(_ref, NALU265.IDR_N_LP, 'IDR2'), _defineProperty(_ref, NALU265.CRA, 'CRA'), _defineProperty(_ref, NALU265.VPS, 'VPS'), _defineProperty(_ref, NALU265.SPS, 'SPS'), _defineProperty(_ref, NALU265.PPS, 'PPS'), _defineProperty(_ref, NALU265.AUD, 'AUD'), _defineProperty(_ref, NALU265.SEI, 'SEI'), _defineProperty(_ref, NALU265.SEI2, 'SEI2'), _ref;
+        return _ref = {}, _defineProperty(_defineProperty(_defineProperty(_defineProperty(_defineProperty(_defineProperty(_defineProperty(_defineProperty(_defineProperty(_defineProperty(_ref, NALU265.TRAIL_N, 'TRAIL_N'), NALU265.TRAIL_R, 'TRAIL_R'), NALU265.IDR_W_RADL, 'IDR'), NALU265.IDR_N_LP, 'IDR2'), NALU265.CRA, 'CRA'), NALU265.VPS, 'VPS'), NALU265.SPS, 'SPS'), NALU265.PPS, 'PPS'), NALU265.AUD, 'AUD'), NALU265.SEI, 'SEI'), _defineProperty(_ref, NALU265.SEI2, 'SEI2');
       }
     }]);
-    return NALU265;
   }();
 
   var H265Remuxer = /*#__PURE__*/function (_BaseRemuxer) {
-    _inherits(H265Remuxer, _BaseRemuxer);
-    var _super = _createSuper(H265Remuxer);
     function H265Remuxer(timescale, duration, frameDuration) {
       var _this;
       _classCallCheck(this, H265Remuxer);
-      _this = _super.call(this, 'H264Remuxer');
+      _this = _callSuper(this, H265Remuxer, ['H264Remuxer']);
       _this.frameDuration = frameDuration;
       _this.readyToDecode = false;
       _this.nextDts = 0;
@@ -2687,7 +2654,8 @@
       _this.pendingUnits = {};
       return _this;
     }
-    _createClass(H265Remuxer, [{
+    _inherits(H265Remuxer, _BaseRemuxer);
+    return _createClass(H265Remuxer, [{
       key: "resetTrack",
       value: function resetTrack() {
         this.readyToDecode = false;
@@ -2964,16 +2932,13 @@
         return push;
       }
     }]);
-    return H265Remuxer;
   }(BaseRemuxer);
 
   var RemuxController = /*#__PURE__*/function (_Event) {
-    _inherits(RemuxController, _Event);
-    var _super = _createSuper(RemuxController);
     function RemuxController(env, live, videoCodec, frameDuration) {
       var _this;
       _classCallCheck(this, RemuxController);
-      _this = _super.call(this, 'remuxer');
+      _this = _callSuper(this, RemuxController, ['remuxer']);
       _this.videoCodec = videoCodec;
       _this.frameDuration = frameDuration;
       _this.initialized = false;
@@ -2984,7 +2949,8 @@
       _this.mediaDuration = live ? 0xffffffff : 0;
       return _this;
     }
-    _createClass(RemuxController, [{
+    _inherits(RemuxController, _Event);
+    return _createClass(RemuxController, [{
       key: "addTrack",
       value: function addTrack(type) {
         var _this2 = this;
@@ -3105,16 +3071,13 @@
         this.flush();
       }
     }]);
-    return RemuxController;
   }(Event);
 
   var BufferController = /*#__PURE__*/function (_Event) {
-    _inherits(BufferController, _Event);
-    var _super = _createSuper(BufferController);
     function BufferController(sourceBuffer, type) {
       var _this;
       _classCallCheck(this, BufferController);
-      _this = _super.call(this, 'buffer');
+      _this = _callSuper(this, BufferController, ['buffer']);
       _this.type = type;
       _this.queue = new Uint8Array();
       _this.cleaning = false;
@@ -3142,7 +3105,8 @@
       });
       return _this;
     }
-    _createClass(BufferController, [{
+    _inherits(BufferController, _Event);
+    return _createClass(BufferController, [{
       key: "destroy",
       value: function destroy() {
         this.queue = null;
@@ -3216,16 +3180,13 @@
         this.queue = appendByteArray(this.queue, data);
       }
     }]);
-    return BufferController;
   }(Event);
 
   var JMuxer = /*#__PURE__*/function (_Event) {
-    _inherits(JMuxer, _Event);
-    var _super = _createSuper(JMuxer);
     function JMuxer(options) {
       var _this;
       _classCallCheck(this, JMuxer);
-      _this = _super.call(this, 'jmuxer');
+      _this = _callSuper(this, JMuxer, ['jmuxer']);
       _this.isReset = false;
       var defaults = {
         node: '',
@@ -3271,9 +3232,9 @@
       _this.initData();
 
       /* events callback */
-      _this.remuxController.on('buffer', _this.onBuffer.bind(_assertThisInitialized(_this)));
+      _this.remuxController.on('buffer', _this.onBuffer.bind(_this));
       if (_this.env == 'browser') {
-        _this.remuxController.on('ready', _this.createBuffer.bind(_assertThisInitialized(_this)));
+        _this.remuxController.on('ready', _this.createBuffer.bind(_this));
         _this.initBrowser();
       }
       _this.remuxController.on('missingVideoFrames', function () {
@@ -3300,7 +3261,8 @@
       }
       return _this;
     }
-    _createClass(JMuxer, [{
+    _inherits(JMuxer, _Event);
+    return _createClass(JMuxer, [{
       key: "initData",
       value: function initData() {
         this.lastCleaningTime = Date.now();
@@ -3596,7 +3558,6 @@
         return window.MediaSource && window.MediaSource.isTypeSupported(codec);
       }
     }]);
-    return JMuxer;
   }(Event);
 
   return JMuxer;

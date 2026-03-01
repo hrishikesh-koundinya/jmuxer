@@ -44,12 +44,21 @@
 
 import express from "express";
 import expressWs from "express-ws";
+import path from "path";
 import fs from "fs/promises";
 import { encode } from "msgpack-lite";
 import JMuxer from "./jmuxer.min.js";
 
 const app = express();
 expressWs(app);
+
+//host msgpack-lite dist
+const msgPack = path.resolve("../node_modules/msgpack-lite/dist/msgpack.min.js");
+
+app.get("/msgpack-lite.min.js", (req, res) => {
+    res.set('Content-Type', 'text/javascript');
+    res.sendFile(msgPack);
+});
 
 app.use(express.static('.'));
 
