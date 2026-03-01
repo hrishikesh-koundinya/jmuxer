@@ -1,8 +1,7 @@
 // Rollup plugins
 import babel from '@rollup/plugin-babel';
-import eslint from '@rollup/plugin-eslint';
 import replace from '@rollup/plugin-replace';
-import { terser } from 'rollup-plugin-terser';
+import terser from '@rollup/plugin-terser';
 export default {
     input: 'src/jmuxer.js',
     output: [
@@ -46,7 +45,6 @@ export default {
         console.error(message);
     },
     plugins: [
-        eslint(),
         babel({
             exclude: 'node_modules/**',
             babelHelpers: 'bundled'
